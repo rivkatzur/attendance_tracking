@@ -1,0 +1,30 @@
+<h3><%= I18n.t("date.month_names")[@month.to_i] %>   <%= @year %></h3>
+<%= form_tag({}) do -%>
+	<div class="autoscroll">
+		<table class="monthly_summaries-list list">
+		  <thead>
+		    <tr>
+		      <th width="2%" class="checkbox hide-when-print">
+			        <%= link_to image_tag('toggle_check.png'), {},
+			                              :onclick => 'toggleIssuesSelection(this); return false;',
+			                              :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+			  </th> 
+		      <th width="10%"><%= l(:label_labor_hours) %></th>
+		      <th width="30%"><%= l(:label_member) %></th>
+		      <th width="20%"><%= l(:label_hours) %></th>
+		      <th width="20%"><%= l(:label_percent) %></th>
+		    </tr>
+		  </thead>
+		  <% @monthly_summaries.each do |summary| %>
+		    <tr id="monthly_summaries-<%= summary[:user_id] %>" class="<%= cycle("odd", "even") %> hascontextmenu">
+		      <td align="center" class="checkbox hide-when-print"><%= check_box_tag("ids[]", summary[:user_id], false, :id => nil) %></td>
+		      <td align="center">
+		      	<%= link_to summary[:labor_hours], edit_user_path(summary[:user_id]) %></td>
+		      <td align="center"><%= link_to summary[:user_name], user_path(summary[:user_id]) %></td>
+		      <td align="center"><%= summary[:sum] %></td>      
+		      <td align="center" class="<%= summary[:class] %>"><%= summary[:percent] %></td>
+		    </tr>
+		  <% end %>
+		</table>
+	</div>
+<% end %>

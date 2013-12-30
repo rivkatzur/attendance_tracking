@@ -1,0 +1,8 @@
+<h2><%= l(:daily_summary_title)%></h2>
+
+<%= render :partial => 'form' %>
+
+<% content_for(:header_tags) do %>
+<%= stylesheet_link_tag 'attendance_tracking.css', :plugin => 'attendance_tracking', :media => 'all' %>
+<%= javascript_include_tag 'attendance_tracking.js', :plugin => 'attendance_tracking' %>
+<% end %>

@@ -1,0 +1,8 @@
+<h2><%= l(:label_holiday_new) %></h2>
+
+<%= labelled_form_for :holiday, @holiday, :url => {:action => 'create'}, :html => { :multipart => true, :id => 'holiday_form'} do |f|  %> 
+  <%= render :partial => 'form', :locals => {:f => f}  %> 
+  <%= submit_tag l(:button_save) -%>
+  <%= submit_tag l(:button_create_and_continue), :name => 'continue' %>
+  <%= link_to l(:button_cancel), holidays_path() %>
+<% end -%>

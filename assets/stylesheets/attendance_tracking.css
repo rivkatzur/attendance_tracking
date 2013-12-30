@@ -1,0 +1,54 @@
+td.less {
+	color: red;
+}
+
+td.unknown {
+	color: blue;
+}
+
+td.more {
+	color: green;
+}
+
+#daily_summary-form fieldset > div {
+	float: left;
+	padding: 5px 10px;
+}
+
+#daily_summary-form .daily_summary-user{
+	clear: both;
+}
+
+#daily_summary-form .daily_summary-project {
+	float: left;
+}
+
+#daily_summary-form .form-actions {
+  width: 100%;
+}
+
+#daily_summary-form label { display: block; }
+
+#daily_summary-form .radiobutton-label label {
+	display: inline;
+}
+
+label.select-all {
+	cursor: pointer;
+	background-color: #f5f5f5;
+}
+
+#monthly_summary-form fieldset > div {
+	float: left;
+	padding: 5px 10px;
+}
+
+#monthly_summary-form .monthly_summary-user {
+	clear: both;
+}
+
+#monthly_summary-form label { display: block; }
+
+#monthly_summary-form .form-actions {
+  width: 100%;
+}

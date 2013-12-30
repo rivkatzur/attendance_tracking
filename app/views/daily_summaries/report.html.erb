@@ -1,0 +1,15 @@
+<div class="contextual">
+  <%= link_to_csv_export({:users => @users_ids, :projects => @projects_ids, :from => @from, :to => @to, :select_type => @select_type, :all => @all}) %>
+</div>
+
+<h2><%= l(:daily_summary_title)%></h2>
+
+<%= render :partial => 'form' %>
+<% if @daily_summaries.length > 0 %>
+  <%= render :partial => 'list' %>
+<% end %>
+
+<% content_for(:header_tags) do %>
+<%= stylesheet_link_tag 'attendance_tracking.css', :plugin => 'attendance_tracking', :media => 'all' %>
+<%= javascript_include_tag 'attendance_tracking.js', :plugin => 'attendance_tracking' %>
+<% end %>

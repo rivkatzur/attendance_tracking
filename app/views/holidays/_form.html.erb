@@ -1,0 +1,9 @@
+<%= error_messages_for 'holiday' %>
+
+<div class="box tabular" id="holiday_data">     
+  <div id="all_attributes">
+    <p><%= f.text_field "date", {:size => 10, :required => true} %><%= calendar_for('holiday_date') %></p>
+	<p><%= f.text_field "description", {:size => 10, :required => true} %></p>
+	 
+  </div>    	
+</div>    

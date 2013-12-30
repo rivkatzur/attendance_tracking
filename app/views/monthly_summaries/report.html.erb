@@ -1,0 +1,21 @@
+<div class="contextual">
+  <%= link_to_csv_export({:year => @year, :month => @month, :users => @users_ids}) %> | 
+  <%= link_to l(:label_holidays), {:controller => 'holidays', :action => 'index'} %>
+</div>
+
+<h2><%= l(:monthly_summary_title)%></h2>
+
+<%= render :partial => 'form' %>
+<% if @monthly_summaries.length > 0 %>
+  <%= render :partial => 'list' %>
+<% end %>
+
+
+<% content_for(:header_tags) do %>
+<%= javascript_include_tag 'context_menu' %>
+<%= stylesheet_link_tag 'context_menu' %>
+<%= stylesheet_link_tag 'attendance_tracking.css', :plugin => 'attendance_tracking', :media => 'all' %>
+<%= javascript_include_tag 'attendance_tracking.js', :plugin => 'attendance_tracking' %>
+<% end %>
+
+<%= context_menu monthly_summaries_context_menu_path %>

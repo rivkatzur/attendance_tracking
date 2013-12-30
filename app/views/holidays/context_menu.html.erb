@@ -1,0 +1,11 @@
+<ul>
+
+    <% unless @holidays.nil? %>
+        <li><%= context_menu_link l(:button_edit), {:controller => 'holidays', :action => 'edit', :id => @holidays.collect(&:id)}, :class => 'icon-edit', :disabled => !@can[:edit] %></li>
+        
+        
+     <li><%= context_menu_link l(:button_delete), {:controller => 'holidays', :action => 'bulk_destroy', :ids => @holidays.collect(&:id)},
+                            :method => :delete, :confirm => l(:text_are_you_sure), :class => 'icon-del', :disabled => !@can[:delete] %></li>
+
+    <% end %>
+</ul>

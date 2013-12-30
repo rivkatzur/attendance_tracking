@@ -1,0 +1,33 @@
+<%= form_tag({}) do -%>
+	<div class="autoscroll">
+		<table class="holidays-list list">
+		  <thead>
+		    <tr>
+		      <th width="2%" class="checkbox hide-when-print">
+			        <%= link_to image_tag('toggle_check.png'), {},
+			                              :onclick => 'toggleIssuesSelection(this); return false;',
+			                              :title => "#{l(:button_check_all)}/#{l(:button_uncheck_all)}" %>
+			  </th> 
+		      <th width="10%"><%= l(:label_date) %></th>
+		      <th width="30%"><%= l(:label_description) %></th>
+		      <th width="3%"></th>
+		    </tr>
+		  </thead>
+		  <% @holidays.each do |holiday| %>
+		    <tr id="holidays-<%= holiday.id %>" class="<%= cycle("odd", "even") %> hascontextmenu">
+		      <td align="center" class="checkbox hide-when-print"><%= check_box_tag("ids[]", holiday.id, false, :id => nil) %></td>
+		      <td align="center"><%= holiday.date %></td>      
+		      <td align="center"><%= holiday.description %></td>
+		      <td align="center">
+		    		<%= link_to image_tag('edit.png'), {:controller => 'holidays', :action => 'edit', :id => holiday.id},
+		    		:title => l(:button_edit) %>
+		    		<%= link_to image_tag('delete.png'), {:controller => 'holidays', :action => 'destroy', :id => holiday.id},
+		    		:confirm => l(:text_are_you_sure),
+		    		:method => :delete,
+		    		:title => l(:button_delete) %>
+	  	  </td>
+		    </tr>
+		  <% end %>
+		</table>
+	</div>
+<% end %>

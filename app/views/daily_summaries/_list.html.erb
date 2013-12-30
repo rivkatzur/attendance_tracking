@@ -1,0 +1,39 @@
+<% @daily_summaries.each do |obj, daily_summaries| %>
+  <h3>
+    <% if obj %>
+  	  Spent Time for <%= obj.name %>(<%= daily_summaries.map(&:hours).sum.round(2) %> Hours)
+    <% else %>
+      Spent Time (<%= daily_summaries.map(&:hours).sum.round(2) %> Hours)
+    <% end -%>
+  </h3>
+
+  <table class="daily_summaries-list list">
+    <thead>
+      <tr> 
+        <% if @select_type == 'project' %><th width="20%"><%= l(:projects_label) %></th><% end -%>
+        <th width="30%"><%= l(:label_member) %></th>
+        <th width="20%"><%= l(:daily_summary_label_spent_on) %></th>
+        <th width="20%"><%= l(:label_hours) %></th>
+        <th width="2%">
+      </tr>
+    </thead>
+    <% daily_summaries.each do |daily_summary| %>
+      <tr class="<%= cycle("odd", "even") %>">
+        <% if @select_type == 'project' %><td align="center"><%= obj.name unless obj.nil? %></td><% end -%>
+        <td align="center"><%= User.find(daily_summary.user_id).name unless daily_summary.user_id.nil? %></td>
+        <td align="center"><%= format_date(daily_summary.spent_on) %></td> 
+        <td align="center"><%= daily_summary.hours.round(2) %></td>
+        <td align="center">
+      	<% if daily_summary.id -%>
+      		<%= link_to image_tag('edit.png'), {:controller => 'timelog', :action => 'edit', :id => daily_summary},
+      		:title => l(:button_edit) %>
+      		<%= link_to image_tag('delete.png'), {:controller => 'timelog', :action => 'destroy', :id => daily_summary},
+      		:confirm => l(:text_are_you_sure),
+      		:method => :delete,
+      		:title => l(:button_delete) %>
+      	<% end -%>
+    	  </td>
+      </tr>
+    <% end %>
+  </table>
+<% end %>

@@ -1,0 +1,49 @@
+<div id="daily_summary-form">
+  <%= form_for :daily_summary, :url =>{:action => 'report'} do |f|  %>
+    <fieldset>
+      <div>
+        <div class="radiobutton-label">
+          <%= radio_button_tag 'daily_summary[period_type]', '1', !@free_period %>
+          <label for="daily_summary_period_type_1"><%= l(:daily_summary_date_range_label)%></label>
+        </div>
+        <%= select_tag 'daily_summary[period]', options_for_period_select((params[:daily_summary].nil? ? nil : params[:daily_summary][:period])),
+            :id => 'select_daily_summary_period_type_1', :onfocus => '$("daily_summary_period_type_1").checked = true;'%>
+      </div>
+      <div>
+        <div class="radiobutton-label">
+          <%= radio_button_tag 'daily_summary[period_type]', '2', @free_period %>
+          <label for="daily_summary_date_from"><%= l(:daily_summary_date_from_label)%></label>
+        </div>
+        <span id="select_daily_summary_period_type_2" onclick="$('#daily_summary_period_type_2').checked = true;">
+          <%= f.text_field "date_from", {:value => @from, :size => 10} %><%= calendar_for('daily_summary_date_from') %>
+          <label for="daily_summary_date_to"><%= l(:daily_summary_date_to_label)%></label>
+          <%= f.text_field "date_to", {:value => @to, :size => 10} %><%= calendar_for('daily_summary_date_to') %>
+        </span>
+      </div>
+      <div class="group-by">
+        <label for="daily_summary_select_type"><%= l(:daily_summary_group_by) %></label>
+        <%= select_tag("daily_summary[select_type]", options_for_select(DailySummary::ValidSelectOptions.invert, @select_type)) %>
+      </div>  
+      <div class="daily_summary-user">
+        <div>
+          <div class="daily_summary-users">
+            <label for="daily_summary_users_" class="select-all"><%= l(:users_label)%></label>
+            <%= select_tag 'daily_summary[users][]', user_options(@users_ids), { :multiple => true, :size => @list_size} %>
+          </div>
+        </div>
+      </div>
+      <div class="daily_summary-project">
+        <div>
+          <div class="daily_summary-projects">
+            <label for="daily_summary_projects_" class="select-all"><%= l(:projects_label)%></label>
+            <%= select_tag 'daily_summary[projects][]', project_options(@projects_ids), { :multiple => true, :size => @list_size} %>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= submit_tag l(:button_apply),:class => 'button-small' -%>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

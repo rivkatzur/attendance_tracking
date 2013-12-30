@@ -1,0 +1,13 @@
+<ul>
+  
+  <li class="folder">
+    <a href="#" class="submenu"><%= l(:field_labor_hours) %></a>
+    <ul>
+    <% (0.0...12.0).step(0.25).reverse.each do |u| -%>
+        <li><%= context_menu_link u, {:controller => 'monthly_summaries', :action => 'edit_labor_hours', :monthly_summary => {'labor_hours' => u, :ids => @users}, :back_url => @back} %></li>
+    <% end -%>
+    </ul>
+  </li>
+
+ 
+</ul>

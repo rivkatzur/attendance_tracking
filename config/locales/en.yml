@@ -1,0 +1,22 @@
+# English strings go here for Rails i18n
+en:
+  users_label: users
+  projects_label: projects
+  field_date: Date
+  label_percent: Percent
+  label_description: Description
+  label_labor_hours: S Contract
+  
+  daily_summary_title: Daily Summary
+  daily_summary_date_range_label: Period
+  daily_summary_date_from_label: From
+  daily_summary_date_to_label: To
+  daily_summary_label_spent_on: Date
+  daily_summary_group_by: Group
+
+  monthly_summary_title: Monthly Summary
+  field_labor_hours: hours
+
+  holiday_title: Holidays
+  label_holiday_new: New holiday
+  label_holidays: Holidays

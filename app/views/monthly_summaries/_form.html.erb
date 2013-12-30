@@ -1,0 +1,18 @@
+<div id="monthly_summary-form">
+  <%= form_for :monthly_summary, :url =>{:action => 'report'} do |f|  %>
+    <fieldset>
+      <div>
+      	<%= select_month(@month ? @month.to_i : Date.today.month, {}, :id => 'select_monthly_summary_month', :name => 'monthly_summary[month]') %>
+        <%= select_year(@year ? @year.to_i : Date.today.year, {:start_year=> 2000, :end_year=> 2020}, :id => 'select_monthly_summary_year', :name => 'monthly_summary[year]') %>
+      </div>
+
+      <div class="monthly_summary-user">
+        <label for="monthly_summary_users_" class="select-all"><%= l(:users_label)%></label>
+        <%= select_tag 'monthly_summary[users][]', user_options(@users_ids), { :multiple => true, :size => @list_size} %>
+      </div>
+      <div class="form-actions">
+        <%= submit_tag l(:button_apply),:class => 'button-small' -%>
+      </div>
+    </fieldset>
+  <% end %>
+</div>

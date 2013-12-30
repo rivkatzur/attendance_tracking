@@ -1,0 +1,15 @@
+<div class="contextual">
+    <%= link_to l(:label_holiday_new), {:controller => 'holidays', :action => 'new'}, :class => 'icon icon-add' %>
+</div>
+
+<h2><%= l(:holiday_title)%></h2>
+
+<%= render :partial => 'list' %>
+
+<% content_for(:header_tags) do %>
+<%= javascript_include_tag 'context_menu' %>
+<%= stylesheet_link_tag 'context_menu' %>
+<%= stylesheet_link_tag 'attendance_tracking.css', :plugin => 'attendance_tracking', :media => 'all' %>
+<% end %>
+
+<%= context_menu holidays_context_menu_path %>
