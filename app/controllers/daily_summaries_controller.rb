@@ -18,18 +18,18 @@ class DailySummariesController < ApplicationController
   	  if params[:daily_summary][:select_type] == 'user'
   	  	@select_type = 'user'
 		  if @all
-			summaries = DailySummary.select('user_id, spent_on, sum(hours) as hours').where('user_id in (?)', @users_ids).group('user_id', 'spent_on').order('user_id', 'spent_on')
+			summaries = TimeEntry.select('user_id, spent_on, sum(hours) as hours').where('user_id in (?)', @users_ids).group('user_id', 'spent_on').order('user_id', 'spent_on')
 		  else
-		   	summaries = DailySummary.select('user_id, spent_on, sum(hours) as hours').where('user_id in (?) AND spent_on >= ? AND spent_on <= ?', @users_ids, @from, @to).group('user_id', 'spent_on').order('user_id', 'spent_on')
+		   	summaries = TimeEntry.select('user_id, spent_on, sum(hours) as hours').where('user_id in (?) AND spent_on >= ? AND spent_on <= ?', @users_ids, @from, @to).group('user_id', 'spent_on').order('user_id', 'spent_on')
 		  end
 		  @daily_summaries << [nil, summaries] if !summaries.blank? && summaries.map(&:hours).sum > 0
 	  elsif params[:daily_summary][:select_type] == 'project'
 	  	@select_type = 'project'
 	  	@projects_ids.each do |project_id|
 		  	if @all
-		  		summaries = DailySummary.select('user_id, project_id, spent_on, sum(hours) as hours').where('project_id = ? And user_id in (?)', project_id, @users_ids).group('user_id', 'project_id', 'spent_on').order('project_id', 'user_id', 'spent_on')
+		  		summaries = TimeEntry.select('user_id, project_id, spent_on, sum(hours) as hours').where('project_id = ? And user_id in (?)', project_id, @users_ids).group('user_id', 'project_id', 'spent_on').order('project_id', 'user_id', 'spent_on')
 		  	else
-		  		summaries = DailySummary.select('user_id, project_id, spent_on, sum(hours) as hours').where('project_id = ? And user_id in (?) AND spent_on >= ? AND spent_on <= ?', project_id, @users_ids, @from, @to).group('user_id', 'project_id', 'spent_on').order('project_id', 'user_id', 'spent_on')
+		  		summaries = TimeEntry.select('user_id, project_id, spent_on, sum(hours) as hours').where('project_id = ? And user_id in (?) AND spent_on >= ? AND spent_on <= ?', project_id, @users_ids, @from, @to).group('user_id', 'project_id', 'spent_on').order('project_id', 'user_id', 'spent_on')
 		  	end		  	
 	  		@daily_summaries << [Project.find(project_id), summaries] if !summaries.blank? && summaries.map(&:hours).sum > 0
 		end

@@ -42,7 +42,7 @@ class MonthlySummariesController < ApplicationController
 
   def get_summary_for_user(user_id)
   	summary = {}
-  	daily_summaries = DailySummary.where('user_id = ? AND spent_on >= ? AND spent_on <= ?', user_id, @from, @to).order('user_id', 'spent_on')
+  	daily_summaries = TimeEntry.where('user_id = ? AND spent_on >= ? AND spent_on <= ?', user_id, @from, @to).order('user_id', 'spent_on')
   	sum = daily_summaries.sum('hours')
   	if sum > 0
   		user = User.find(user_id)
