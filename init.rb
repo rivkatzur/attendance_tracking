@@ -1,13 +1,10 @@
-require_dependency 'attendance_tracking/patches/time_entry_patch'
-
-
 Redmine::Plugin.register :attendance_tracking do
   name 'Attendance Tracking plugin'
   author 'Rivka Tzur'
   description 'This is a plugin for Redmine'
   version '0.0.1'
-  url 'http://example.com/path/to/plugin'
-  author_url 'http://example.com/about'
+  url 'https://github.com/rivkatzur/attendance_tracking.git'
+  author_url ''
 
   menu :application_menu, :daily_summary, { :controller => :daily_summaries, :action => :index }, :caption => 'Daily Summary', :if => Proc.new { User.current.logged? && User.current.allowed_to?(:view_all_daily_summaries, nil, :global => true) } 
   menu :project_menu, :daily_summary, { :controller => :daily_summaries, :action => :index }, :caption => :label_daily_summery
