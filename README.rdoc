@@ -1,0 +1,32 @@
+= Attendance Tracking (Redmine plugin)
+
+Show and filter timelog entries across all projects in Redmine grouping by spent date.
+Admin Only
+
+Further modifications are:
+* Daily summary of timelog group by user
+* Daily summary of timelog group by project
+* Monthly summary of timelog group by user
+
+== Features
+* Filtering and sum of timelogs by:
+  * Date range
+  * Projects
+  * Users
+* Grouping of timelogs by:
+  * Project
+  * User
+* Percents of user timelog for the month (Consideration vacations)
+* CSV exports
+
+== Getting the plugin
+
+Latest copy of plugin is available at {GitHub}[https://github.com/rivkatzur/attendance_tracking.git]
+
+== Installation and Setup
+
+1. In your redmine plugins directory, run the command: `git clone https://github.com/rivkatzur/attendance_tracking.git redmine_timesheet_plugin`
+2. Run the command: `rake redmine:plugins:migrate`
+3. Restart web server
+4. Login as Admin and click the Daily Summary / Monthly Summary link
+5. Add holidays Monthly Summary -> Holidays
