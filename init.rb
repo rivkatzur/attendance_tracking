@@ -22,4 +22,4 @@ end
 
 BusinessTime::Config.work_week = [:sun, :mon, :tue, :wed, :thu]
 
-BusinessTime::Config.holidays = Holiday.all.map(&:date)
+begin BusinessTime::Config.holidays = Holiday.all.map(&:date); rescue; end

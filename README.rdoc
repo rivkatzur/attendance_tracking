@@ -26,7 +26,8 @@ Latest copy of plugin is available at {GitHub}[https://github.com/rivkatzur/atte
 == Installation and Setup
 
 1. In your redmine plugins directory, run the command: `git clone https://github.com/rivkatzur/attendance_tracking.git redmine_timesheet_plugin`
-2. Run the command: `rake redmine:plugins:migrate`
-3. Restart web server
-4. Login as Admin and click the Daily Summary / Monthly Summary link
-5. Add holidays Monthly Summary -> Holidays
+2. Run the command: ` rake redmine:plugins:migrate NAME=attendance_tracking RAILS_ENV=production`
+3. bundle install
+4. Restart web server
+5. Login as Admin and click the Daily Summary / Monthly Summary link
+6. Add holidays Monthly Summary -> Holidays
