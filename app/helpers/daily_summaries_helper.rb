@@ -8,7 +8,7 @@ module DailySummariesHelper
               :controller => 'daily_summaries',
               :action => 'report',
               :format => 'csv',
-              :daily_summary => params
+              :daily_summary_params => params
             },
             :method => 'post',
             :class => 'icon icon-daily_summaries')

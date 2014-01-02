@@ -8,6 +8,9 @@ class DailySummariesController < ApplicationController
   end
 
   def report
+  	if params[:daily_summary_params]
+      params[:daily_summary] = JSON.parse(params[:daily_summary_params]).with_indifferent_access
+    end
   	if params && params[:daily_summary]
   	  @users_ids = params[:daily_summary][:users]	
   	  @projects_ids =  params[:daily_summary][:projects]

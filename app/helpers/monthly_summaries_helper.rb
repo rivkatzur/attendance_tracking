@@ -7,7 +7,7 @@ module MonthlySummariesHelper
 	            :controller => 'monthly_summaries',
 	            :action => 'report',
 	            :format => 'csv',
-	            :monthly_summary => params
+	            :monthly_summary_params => params
 	        },
 	        :method => 'post',
 	        :class => 'icon icon-monthly_summaries')

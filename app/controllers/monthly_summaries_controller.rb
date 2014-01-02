@@ -13,6 +13,9 @@ class MonthlySummariesController < ApplicationController
 
   def report
   	@monthly_summaries = []
+    if params[:monthly_summary_params]
+      params[:monthly_summary] = JSON.parse(params[:monthly_summary_params]).with_indifferent_access
+    end
   	if params && params[:monthly_summary]
   		@users_ids = params[:monthly_summary][:users] || User.where(:status => User::STATUS_ACTIVE).sort { |a,b| a.to_s.downcase <=> b.to_s.downcase }
   		@month = params[:monthly_summary][:month]
