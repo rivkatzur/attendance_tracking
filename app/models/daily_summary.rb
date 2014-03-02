@@ -17,26 +17,28 @@ class DailySummary < ActiveRecord::Base
 
   def self.prepare_daily_summary_csv(daily_summaries)
     summary_csv = FasterCSV.generate do |csv|
-	  # header row
-	  csv << ['project', 'member', 'date', 'hours']
-	  sum = 0
-	  # data rows
-	  daily_summaries.each do |project, daily_summary|
-      daily_summary.each do |d_s|
-
-  	    csv << [
-                project.nil? ? '' : project.name,
-                d_s.user.name,
-                d_s.spent_on,
-                d_s.hours.round(2)
-               ]
+      # header row
+      csv << ['Project', 'Member', 'Hours']
+      sum = 0
+      projects = {}
+      # data rows
+      daily_summaries.each do |project, daily_summary|
+        name = project ? project.name : ''
+        projects[name] ||= {}
+        daily_summary.each do |d_s|
+          projects[name][d_s.user.name] ||= 0
+          projects[name][d_s.user.name] += d_s.hours
+        end
       end
-      sum +=  daily_summary.map(&:hours).sum
-	  end
 
-	  # summary
-	  csv << []
-	  csv << ['', '', 'summary', sum.round(2)]
-	end
+      projects.each do |project, user|
+        user.each do |name, value|
+        
+          csv << [project, name, value.round(2)]
+        end
+      end
+
+    end
+
   end
 end
