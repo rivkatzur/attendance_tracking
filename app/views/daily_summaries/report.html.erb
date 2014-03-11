@@ -1,5 +1,5 @@
 <div class="contextual">
-  <%= link_to_csv_export({:users => @users_ids, :projects => @projects_ids, :from => @from, :to => @to, :select_type => @select_type, :all => @all}.to_json) %>
+  <%= link_to_csv_export({:users => @rs, :projects => @ps, :from => @from, :to => @to, :select_type => @select_type, :all => @all}.to_json) %>
 </div>
 
 <h2><%= l(:daily_summary_title)%></h2>

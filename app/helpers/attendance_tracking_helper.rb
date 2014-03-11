@@ -2,7 +2,7 @@ module AttendanceTrackingHelper
   include ContextMenusHelper 
 
   def user_options(selected_users)
-    available_users = User.all.sort { |a,b| a.to_s.downcase <=> b.to_s.downcase }
+    available_users = User.active.sort { |a,b| a.to_s.downcase <=> b.to_s.downcase }
     selected_users = available_users.map(&:id) if selected_users.blank?
     options_from_collection_for_select(available_users, :id, :name, selected_users)
 

@@ -12,10 +12,14 @@ class DailySummariesController < ApplicationController
       params[:daily_summary] = JSON.parse(params[:daily_summary_params]).with_indifferent_access
     end
   	if params && params[:daily_summary]
-  	  @users_ids = params[:daily_summary][:users]	
+  	  @users_ids = params[:daily_summary][:users]
+  	  @rs = @users_ids[0].is_a?(Array) ? @users_ids : make_ranges(@users_ids)
+  	  @users_ids = read_ranges(@rs)
   	  @projects_ids =  params[:daily_summary][:projects]
+  	  @ps = @projects_ids[0].is_a?(Array) ? @projects_ids : make_ranges(@projects_ids)
+  	  @projects_ids = read_ranges(@ps)
   	  @all = params[:daily_summary][:all]
-  	  retrieve_date_range unless @all == 'true'
+  	  retrieve_date_range unless (@all == true || @all == 'true')
   	  @daily_summaries = []
 
   	  if params[:daily_summary][:select_type] == 'user'
@@ -44,13 +48,43 @@ class DailySummariesController < ApplicationController
       redirect_to :action => 'index'
       return
     end
-    
     respond_to do |format|
       format.html { render :action => 'details', :layout => false if request.xhr? }
       format.csv  { send_data DailySummary.prepare_daily_summary_csv(@daily_summaries), :filename => 'daily_summaries.csv', :type => "text/csv" }
     end
   end
 
+  #ranges of ids for shorter url
+  def make_ranges(ids)
+  	int_array = ids.collect{|s| s.to_i}
+
+	int_array = int_array.sort
+	new_ids = []
+	r = []
+	z = int_array[0].to_i
+	r[0] = z
+	int_array.each do |n|
+	    if n > z+1
+	    	new_ids << r
+	    	r = [n]
+	    else
+	       r[1] = n
+	  	end
+	   	z = n
+	end
+	new_ids << r
+	new_ids
+  end
+
+  def read_ranges(ranges)
+	ids = []
+	ranges.each do |r|
+		ids<< (r.min..r.max).to_a
+	end
+	ids.flatten!
+	new_ids = ids.collect{|i| i.to_s}
+	new_ids
+  end
 
 
   # Retrieves the date range based on predefined ranges or specific from/to param dates
